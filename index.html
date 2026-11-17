@@ -3,156 +3,232 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>THE PREMIER LEAGUE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MY BASKETBALL WORLD | Gia Phú</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#07120d;color:white;font-family:Arial,sans-serif;overflow:hidden}
-:root{--lime:#b8f36b;--panel:#14251c}
-.deck{height:100vh;position:relative}
-.slide{display:none;height:100vh;padding:7vh 8vw 100px;overflow:auto;animation:appear .4s ease}
-.slide.active{display:block}
-@keyframes appear{from{opacity:0;transform:translateX(25px)}to{opacity:1;transform:translateX(0)}}
-.hero{height:100%;display:flex;align-items:center;background:linear-gradient(90deg,#07120df0,#07120d77),url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=1800') center/cover}
-.hero h1{font-size:clamp(55px,10vw,120px);line-height:.9;margin:20px 0}
-.green{color:var(--lime)}
-.tag{color:var(--lime);letter-spacing:4px;font-size:13px;font-weight:bold}
-h2{font-size:clamp(32px,5vw,65px);margin:12px 0}
-p{color:#c4d0c7;line-height:1.8}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:25px}
-.card{background:var(--panel);padding:20px;border:1px solid #34513c;border-radius:14px}
-.card h3{color:var(--lime);margin-top:0}
-.big{font-size:40px;font-weight:bold;color:var(--lime)}
-.clubs{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px}
-.club{background:var(--panel);padding:12px;text-align:center;border-radius:12px;font-size:13px}
-.club img{width:55px;height:55px;object-fit:contain;background:white;border-radius:9px;padding:5px}
-.players{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:20px}
-.player{background:var(--panel);border-radius:12px;overflow:hidden}
-.player img{width:100%;height:170px;object-fit:cover}
-.player div{padding:12px}
-.player b{color:var(--lime)}
-.timeline{border-left:3px solid var(--lime);padding-left:25px;margin-top:25px}
-.event{margin-bottom:25px}
-.event strong{color:var(--lime);font-size:24px}
-.controls{position:fixed;bottom:0;left:0;right:0;background:#07120df2;border-top:1px solid #314638;padding:13px 5%;display:flex;align-items:center;justify-content:space-between;z-index:5}
-button{background:var(--lime);color:#07120d;border:0;padding:11px 19px;border-radius:7px;font-weight:bold;cursor:pointer}
-button:disabled{opacity:.3}
+:root{--orange:#ff8a24;--yellow:#ffd166;--bg:#090b10;--panel:#171b25}
+body{margin:0;background:var(--bg);color:#fff;font-family:Arial,sans-serif;overflow:hidden}
+.deck{height:100vh}
+.slide{display:none;height:100vh;padding:6vh 8vw 95px;overflow-y:auto;position:relative}
+.slide.active{display:flex;flex-direction:column;justify-content:center;animation:enter .4s ease}
+@keyframes enter{from{opacity:0;transform:translateX(25px)}to{opacity:1;transform:translateX(0)}}
+.slide:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:#ff8a2420;filter:blur(85px);right:4%;top:8%;pointer-events:none}
+.tag{color:var(--orange);font-weight:bold;letter-spacing:4px;font-size:12px}
+h1{font-size:clamp(55px,10vw,115px);line-height:.9;margin:20px 0}
+h2{font-size:clamp(34px,5vw,64px);margin:12px 0 20px}
+h3{color:var(--yellow);margin:8px 0}
+p{color:#c7cad2;line-height:1.7}
+.orange{color:var(--orange)}
+.yellow{color:var(--yellow)}
+.hero{background:linear-gradient(90deg,#090b10ed,#090b1080),url('https://images.unsplash.com/photo-1546519638-68e109498ffc?w=1800') center/cover}
+.hero-content{max-width:850px}
+.pill{display:inline-block;border:1px solid #ff8a2480;color:#ffd7a6;padding:9px 15px;border-radius:30px;margin:5px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px}
+.card{background:var(--panel);border:1px solid #343b4a;border-radius:15px;padding:19px}
+.emoji{font-size:35px}
+.big{font-size:42px;font-weight:900;color:var(--orange)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.player-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px}
+.player{background:var(--panel);border:1px solid #343b4a;border-radius:14px;overflow:hidden}
+.player img{width:100%;height:170px;object-fit:cover;display:block}
+.player div{padding:13px}
+.player small{color:#aeb5c3}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:20px}
+.team{background:var(--panel);border:1px solid #343b4a;border-radius:12px;text-align:center;padding:17px}
+.team .logo{font-size:38px}
+.quote{font-size:clamp(25px,4vw,42px);font-weight:bold;line-height:1.4;color:#ffe0b4}
+.timeline{border-left:3px solid var(--orange);padding-left:22px;margin-top:20px}
+.event{margin-bottom:20px}
+.event b{color:var(--orange);font-size:23px}
+.controls{position:fixed;bottom:0;left:0;right:0;background:#090b10ed;border-top:1px solid #343b4a;display:flex;justify-content:space-between;align-items:center;padding:12px 5%;z-index:5}
+button{border:0;background:var(--orange);color:#17100a;padding:12px 18px;border-radius:8px;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.3;cursor:default}
+#count{color:var(--yellow);font-weight:bold}
 #dots{display:flex;gap:7px}
-.dot{width:9px;height:9px;border-radius:50%;background:#536456;cursor:pointer}
-.dot.on{background:var(--lime)}
-#count{color:var(--lime);font-weight:bold}
+.dot{width:9px;height:9px;background:#505767;border-radius:50%;cursor:pointer}
+.dot.on{background:var(--orange);box-shadow:0 0 10px var(--orange)}
 @media(max-width:700px){
 .slide{padding:5vh 5vw 90px}
-.cards{grid-template-columns:repeat(2,1fr)}
-.clubs{grid-template-columns:repeat(3,1fr)}
-.players{grid-template-columns:repeat(2,1fr)}
-.player img{height:130px}
+.grid,.player-grid{grid-template-columns:repeat(2,1fr)}
+.team-grid{grid-template-columns:repeat(2,1fr)}
+.two{grid-template-columns:1fr}
 #dots{display:none}
+.player img{height:125px}
 }
 </style>
 </head>
 <body>
 <div class="deck">
 
-<section class="slide active hero">
-<div>
-<div class="tag">ENGLISH FOOTBALL · EST. 1992</div>
-<h1>THE<br><span class="green">PREMIER</span><br>LEAGUE.</h1>
-<p>Hành trình khám phá giải bóng đá hấp dẫn bậc nhất nước Anh.</p>
-<p class="green">A HISTORY OF FOOTBALL, PASSION AND GLORY</p>
+<!-- 01 -->
+<section class="slide hero active">
+<div class="hero-content">
+<div class="tag">🏀 WELCOME TO MY WORLD</div>
+<h1>MY<br><span class="orange">BASKETBALL</span><br>WORLD.</h1>
+<h2>I'm Gia Phú.</h2>
+<p>Không chỉ là một môn thể thao. Bóng rổ là đam mê, phong cách và nguồn cảm hứng của tôi.</p>
+<span class="pill">NBA FAN</span>
+<span class="pill">BASKETBALL LOVER</span>
+<span class="pill">NEVER GIVE UP</span>
 </div>
 </section>
 
+<!-- 02 -->
 <section class="slide">
-<div class="tag">02 / GIỚI THIỆU</div>
-<h2>Premier League là gì?</h2>
-<p>Premier League là giải đấu cao nhất trong hệ thống bóng đá nam chuyên nghiệp Anh. Giải chính thức thành lập năm 1992 và nhanh chóng trở thành một trong những giải đấu được quan tâm nhất thế giới.</p>
-<div class="cards">
-<div class="card"><div class="big">1992</div><h3>Thành lập</h3><p>Khởi đầu kỷ nguyên Premier League.</p></div>
-<div class="card"><div class="big">20</div><h3>Câu lạc bộ</h3><p>20 đội bóng tham gia mỗi mùa.</p></div>
-<div class="card"><div class="big">380</div><h3>Trận đấu</h3><p>Tổng số trận trong một mùa giải.</p></div>
+<div class="tag">02 / ABOUT ME</div>
+<h2>WHO IS <span class="orange">GIA PHÚ?</span></h2>
+<div class="two">
+<div class="card">
+<div class="emoji">😎</div>
+<h3>Thông tin cá nhân</h3>
+<p><b>Họ tên:</b> Nguyễn Thế Gia Phú</p>
+<p><b>Biệt danh:</b> Phú</p>
+<p><b>Sở thích lớn:</b> Bóng rổ và NBA</p>
+<p><b>Phong cách:</b> Năng động, vui vẻ</p>
+</div>
+<div class="card">
+<div class="emoji">🏀</div>
+<h3>Thế giới của tôi</h3>
+<p>Tôi yêu thích bóng rổ vì tốc độ, kỹ thuật, tinh thần đồng đội và những khoảnh khắc bùng nổ trên sân đấu.</p>
+<p>NBA là nơi khiến niềm đam mê ấy trở nên đặc biệt hơn.</p>
+</div>
 </div>
 </section>
 
+<!-- 03 -->
 <section class="slide">
-<div class="tag">03 / THỂ THỨC</div>
-<h2>Cuộc đua đường dài</h2>
-<p>Mỗi đội thi đấu với 19 đối thủ theo thể thức lượt đi và lượt về. Tổng cộng 38 trận mỗi đội.</p>
-<div class="cards">
-<div class="card"><div class="big">3</div><h3>Điểm thắng</h3><p>Đội thắng nhận 3 điểm.</p></div>
-<div class="card"><div class="big">1</div><h3>Điểm hòa</h3><p>Mỗi đội nhận 1 điểm.</p></div>
-<div class="card"><div class="big">0</div><h3>Điểm thua</h3><p>Đội thua không có điểm.</p></div>
-</div>
-<div class="card"><h3>Cuộc chiến trụ hạng</h3><p>Ba đội xếp cuối bảng sẽ xuống Championship. Các đội đứng đầu cạnh tranh chức vô địch và suất dự cúp châu Âu.</p></div>
-</section>
-
-<section class="slide">
-<div class="tag">04 / CÁC CÂU LẠC BỘ</div>
-<h2>Những đội bóng lớn</h2>
-<p>Những CLB tiêu biểu với lịch sử, bản sắc và lượng người hâm mộ đông đảo.</p>
-<div class="clubs" id="clubs"></div>
-</section>
-
-<section class="slide">
-<div class="tag">05 / NGÔI SAO</div>
-<h2>Những cầu thủ nổi tiếng</h2>
-<div class="players" id="players"></div>
-</section>
-
-<section class="slide">
-<div class="tag">06 / HUYỀN THOẠI</div>
-<h2>Những cái tên bất tử</h2>
-<div class="cards">
-<div class="card"><h3>Thierry Henry</h3><p>Huyền thoại Arsenal, nổi tiếng với tốc độ, kỹ thuật và khả năng dứt điểm.</p></div>
-<div class="card"><h3>Alan Shearer</h3><p>Giữ kỷ lục ghi 260 bàn thắng tại Premier League.</p></div>
-<div class="card"><h3>Wayne Rooney</h3><p>Chân sút huyền thoại của Manchester United.</p></div>
-<div class="card"><h3>Frank Lampard</h3><p>Tiền vệ ghi bàn xuất sắc của Chelsea.</p></div>
-<div class="card"><h3>Steven Gerrard</h3><p>Đội trưởng huyền thoại của Liverpool.</p></div>
-<div class="card"><h3>Ryan Giggs</h3><p>Huyền thoại Manchester United với kỷ lục kiến tạo.</p></div>
+<div class="tag">03 / MY PERSONALITY</div>
+<h2>MY <span class="orange">PERSONALITY.</span></h2>
+<div class="grid">
+<div class="card"><div class="emoji">🔥</div><h3>Nhiệt huyết</h3><p>Khi đã thích điều gì, tôi luôn muốn thử sức hết mình.</p></div>
+<div class="card"><div class="emoji">😂</div><h3>Hài hước</h3><p>Thích tạo tiếng cười và làm không khí vui vẻ hơn.</p></div>
+<div class="card"><div class="emoji">🤝</div><h3>Đồng đội</h3><p>Tôi thích tinh thần phối hợp và hỗ trợ lẫn nhau.</p></div>
+<div class="card"><div class="emoji">🎯</div><h3>Thích thử thách</h3><p>Không ngại học những kỹ năng mới.</p></div>
+<div class="card"><div class="emoji">😴</div><h3>Đôi khi lười</h3><p>Có lúc chỉ muốn nằm chill và xem highlight NBA.</p></div>
+<div class="card"><div class="emoji">💪</div><h3>Không bỏ cuộc</h3><p>Luôn cố gắng tiến bộ từng chút một.</p></div>
 </div>
 </section>
 
-<section class="slide">
-<div class="tag">07 / HUẤN LUYỆN VIÊN</div>
-<h2>Những bộ óc chiến thuật</h2>
-<div class="cards">
-<div class="card"><h3>Sir Alex Ferguson</h3><p>13 lần vô địch Premier League cùng Manchester United.</p></div>
-<div class="card"><h3>Arsène Wenger</h3><p>Đưa Arsenal đến mùa giải bất bại 2003/04.</p></div>
-<div class="card"><h3>Pep Guardiola</h3><p>Nổi bật với kiểm soát bóng và pressing hiện đại.</p></div>
-<div class="card"><h3>José Mourinho</h3><p>Nhà cầm quân nổi tiếng với chiến thuật thực dụng.</p></div>
-<div class="card"><h3>Jürgen Klopp</h3><p>Đưa Liverpool trở lại đỉnh cao với gegenpressing.</p></div>
-<div class="card"><h3>Carlo Ancelotti</h3><p>HLV từng giúp Chelsea vô địch mùa 2009/10.</p></div>
-</div>
-</section>
-
-<section class="slide">
-<div class="tag">08 / LỊCH SỬ</div>
-<h2>Những mùa giải đáng nhớ</h2>
-<div class="timeline">
-<div class="event"><strong>1992</strong><h3>Premier League ra đời</h3><p>Một kỷ nguyên mới của bóng đá Anh bắt đầu.</p></div>
-<div class="event"><strong>2003–04</strong><h3>The Invincibles</h3><p>Arsenal vô địch mà không thua trận nào.</p></div>
-<div class="event"><strong>2015–16</strong><h3>Leicester City</h3><p>Câu chuyện cổ tích vô địch làm rung chuyển bóng đá thế giới.</p></div>
-<div class="event"><strong>2017–18</strong><h3>100 điểm</h3><p>Manchester City trở thành đội đầu tiên đạt 100 điểm.</p></div>
-<div class="event"><strong>2019–20</strong><h3>Liverpool vô địch</h3><p>Liverpool giành chức vô địch quốc gia sau 30 năm chờ đợi.</p></div>
-</div>
-</section>
-
-<section class="slide">
-<div class="tag">09 / KỶ LỤC</div>
-<h2>Những con số lịch sử</h2>
-<div class="cards">
-<div class="card"><div class="big">260</div><h3>Alan Shearer</h3><p>Kỷ lục ghi bàn nhiều nhất.</p></div>
-<div class="card"><div class="big">13</div><h3>Manchester United</h3><p>Số lần vô địch nhiều nhất.</p></div>
-<div class="card"><div class="big">49</div><h3>Arsenal</h3><p>Chuỗi bất bại dài nhất.</p></div>
-</div>
-</section>
-
+<!-- 04 -->
 <section class="slide hero">
 <div>
-<div class="tag">10 / KẾT THÚC</div>
-<h1>THANK<br><span class="green">YOU!</span></h1>
-<h2>Cảm ơn mọi người đã lắng nghe.</h2>
-<p>Premier League không chỉ là bóng đá, đó còn là đam mê, lịch sử và cảm xúc.</p>
+<div class="tag">04 / MY HOBBIES</div>
+<h2>MORE THAN<br><span class="orange">A HOBBY.</span></h2>
+<div class="grid">
+<div class="card"><div class="emoji">🏀</div><h3>Chơi bóng rổ</h3><p>Tập ném rổ, dẫn bóng và cải thiện kỹ thuật.</p></div>
+<div class="card"><div class="emoji">📺</div><h3>Xem NBA</h3><p>Theo dõi các trận đấu và những pha bóng đỉnh cao.</p></div>
+<div class="card"><div class="emoji">👟</div><h3>Giày bóng rổ</h3><p>Thích tìm hiểu sneaker và giày signature.</p></div>
+<div class="card"><div class="emoji">🎮</div><h3>Giải trí</h3><p>Chơi game và thư giãn cùng bạn bè.</p></div>
+<div class="card"><div class="emoji">🎧</div><h3>Nghe nhạc</h3><p>Âm nhạc giúp tôi có thêm năng lượng.</p></div>
+<div class="card"><div class="emoji">📱</div><h3>Công nghệ</h3><p>Thích khám phá những điều mới trên Internet.</p></div>
+</div>
+</div>
+</section>
+
+<!-- 05 -->
+<section class="slide">
+<div class="tag">05 / NBA IDOLS</div>
+<h2>MY <span class="orange">BASKETBALL IDOLS.</span></h2>
+<p>Những ngôi sao truyền cảm hứng cho người yêu bóng rổ trên toàn thế giới.</p>
+<div class="player-grid">
+<div class="player">
+<img src="https://images.unsplash.com/photo-1504450758481-7338eba7524a?w=700" alt="Basketball player" loading="lazy">
+<div><h3>Stephen Curry</h3><small>GOLDEN STATE WARRIORS · POINT GUARD</small><p>Nổi tiếng với khả năng ném 3 điểm và di chuyển không bóng.</p></div>
+</div>
+<div class="player">
+<img src="https://images.unsplash.com/photo-1519861531473-9200262188bf?w=700" alt="Basketball action" loading="lazy">
+<div><h3>LeBron James</h3><small>LOS ANGELES LAKERS · FORWARD</small><p>Ngôi sao toàn diện với sức mạnh, nhãn quan và sự bền bỉ.</p></div>
+</div>
+<div class="player">
+<img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=700" alt="Basketball court" loading="lazy">
+<div><h3>Michael Jordan</h3><small>CHICAGO BULLS · LEGEND</small><p>Biểu tượng bóng rổ với 6 chức vô địch NBA.</p></div>
+</div>
+<div class="player">
+<img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=700" alt="Sports court" loading="lazy">
+<div><h3>Kobe Bryant</h3><small>LOS ANGELES LAKERS · LEGEND</small><p>Được nhớ đến với tinh thần Mamba Mentality.</p></div>
+</div>
+<div class="player">
+<img src="https://images.unsplash.com/photo-1519861531473-9200262188bf?w=700" alt="Basketball" loading="lazy">
+<div><h3>Kevin Durant</h3><small>NBA STAR · FORWARD</small><p>Khả năng ghi điểm đa dạng và kỹ năng ném bóng xuất sắc.</p></div>
+</div>
+<div class="player">
+<img src="https://images.unsplash.com/photo-1504450758481-7338eba7524a?w=700" alt="Basketball player" loading="lazy">
+<div><h3>Giannis Antetokounmpo</h3><small>MILWAUKEE BUCKS · FORWARD</small><p>Nổi bật với sức mạnh, tốc độ và khả năng tấn công rổ.</p></div>
+</div>
+</div>
+<p><small>*Ảnh trong các thẻ là ảnh minh họa bóng rổ, không phải chân dung xác thực của từng cầu thủ.</small></p>
+</section>
+
+<!-- 06 -->
+<section class="slide">
+<div class="tag">06 / MY FAVORITE TEAMS</div>
+<h2>NBA <span class="orange">TEAMS.</span></h2>
+<p>Một vài đội bóng nổi bật mà người hâm mộ NBA thường nhắc đến.</p>
+<div class="team-grid">
+<div class="team"><div class="logo">☘️</div><h3>Boston Celtics</h3><small>GREEN PRIDE</small></div>
+<div class="team"><div class="logo">💜</div><h3>Los Angeles Lakers</h3><small>LA PURPLE & GOLD</small></div>
+<div class="team"><div class="logo">🌉</div><h3>Golden State Warriors</h3><small>STRENGTH IN NUMBERS</small></div>
+<div class="team"><div class="logo">🐂</div><h3>Chicago Bulls</h3><small>THE WINDY CITY</small></div>
+<div class="team"><div class="logo">🔥</div><h3>Miami Heat</h3><small>HEAT CULTURE</small></div>
+<div class="team"><div class="logo">🦌</div><h3>Milwaukee Bucks</h3><small>FEAR THE DEER</small></div>
+<div class="team"><div class="logo">🗽</div><h3>New York Knicks</h3><small>NEW YORK CITY</small></div>
+<div class="team"><div class="logo">⛰️</div><h3>Denver Nuggets</h3><small>MILE HIGH CITY</small></div>
+</div>
+</section>
+
+<!-- 07 -->
+<section class="slide">
+<div class="tag">07 / NBA LEGENDS</div>
+<h2>THE <span class="orange">LEGENDS.</span></h2>
+<div class="grid">
+<div class="card"><div class="big">23</div><h3>Michael Jordan</h3><p>6 lần vô địch NBA cùng Chicago Bulls. Một biểu tượng của bóng rổ.</p></div>
+<div class="card"><div class="big">24</div><h3>Kobe Bryant</h3><p>5 lần vô địch NBA cùng Lakers. Tinh thần Mamba Mentality.</p></div>
+<div class="card"><div class="big">30</div><h3>Stephen Curry</h3><p>Người thay đổi cách bóng rổ hiện đại nhìn nhận cú ném 3 điểm.</p></div>
+<div class="card"><div class="big">23</div><h3>LeBron James</h3><p>4 lần vô địch NBA và là một trong những cầu thủ toàn diện nhất.</p></div>
+<div class="card"><div class="big">33</div><h3>Kareem Abdul-Jabbar</h3><p>Huyền thoại với cú skyhook trứ danh.</p></div>
+<div class="card"><div class="big">32</div><h3>Magic Johnson</h3><p>Hậu vệ dẫn bóng huyền thoại với khả năng chuyền bóng xuất sắc.</p></div>
+</div>
+</section>
+
+<!-- 08 -->
+<section class="slide hero">
+<div>
+<div class="tag">08 / BASKETBALL CULTURE</div>
+<h2>THE CULTURE<br>OF <span class="orange">BASKETBALL.</span></h2>
+<div class="grid">
+<div class="card"><div class="emoji">👟</div><h3>Sneaker culture</h3><p>Jordan, Kobe, LeBron, Curry và những dòng giày signature.</p></div>
+<div class="card"><div class="emoji">👕</div><h3>Jersey</h3><p>Áo đấu mang màu sắc và lịch sử của mỗi đội bóng.</p></div>
+<div class="card"><div class="emoji">🎤</div><h3>Hip-hop</h3><p>Âm nhạc, thời trang và bóng rổ tạo nên văn hóa đường phố.</p></div>
+</div>
+</div>
+</section>
+
+<!-- 09 -->
+<section class="slide">
+<div class="tag">09 / MY DREAMS</div>
+<h2>MY <span class="orange">GOALS.</span></h2>
+<p>Bóng rổ dạy tôi rằng thành công không đến chỉ sau một cú ném. Đó là kết quả của sự luyện tập và kiên trì.</p>
+<div class="grid">
+<div class="card"><div class="emoji">🏀</div><h3>Kỹ năng</h3><p>Cải thiện khả năng dẫn bóng, ném rổ và phòng thủ.</p></div>
+<div class="card"><div class="emoji">💪</div><h3>Thể lực</h3><p>Rèn luyện sức bền, tốc độ và sức mạnh.</p></div>
+<div class="card"><div class="emoji">🤝</div><h3>Đồng đội</h3><p>Học cách phối hợp và hỗ trợ những người xung quanh.</p></div>
+</div>
+<div class="card" style="margin-top:18px">
+<p style="font-size:23px;color:#ffd166;font-weight:bold">"Hard work beats talent when talent doesn't work hard."</p>
+<p>Chăm chỉ sẽ tạo nên khác biệt.</p>
+</div>
+</section>
+
+<!-- 10 -->
+<section class="slide hero">
+<div>
+<div class="tag">10 / THE FINAL BUZZER</div>
+<h1>THANK<br><span class="orange">YOU!</span></h1>
+<h2>SEE YOU ON THE COURT. 🏀</h2>
+<p>Cảm ơn mọi người đã lắng nghe. Đó là thế giới bóng rổ của tôi!</p>
+<span class="pill">LOVE THE GAME</span>
+<span class="pill">MAMBA MENTALITY</span>
 </div>
 </section>
 
@@ -166,52 +242,31 @@ button:disabled{opacity:.3}
 </div>
 
 <script>
-let current=0;
 const slides=[...document.querySelectorAll('.slide')];
 const dots=document.getElementById('dots');
+let current=0;
 slides.forEach((s,i)=>{
-let d=document.createElement('span');
-d.className='dot'+(i===0?' on':'');
-d.onclick=()=>show(i);
-dots.appendChild(d);
+ const d=document.createElement('span');
+ d.className='dot'+(i===0?' on':'');
+ d.onclick=()=>show(i);
+ dots.appendChild(d);
 });
 function show(n){
-current=Math.max(0,Math.min(slides.length-1,n));
-slides.forEach((s,i)=>s.classList.toggle('active',i===current));
-[...dots.children].forEach((d,i)=>d.classList.toggle('on',i===current));
-document.getElementById('count').textContent=String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
-document.getElementById('prev').disabled=current===0;
-document.getElementById('next').disabled=current===slides.length-1;
+ current=Math.max(0,Math.min(slides.length-1,n));
+ slides.forEach((s,i)=>s.classList.toggle('active',i===current));
+ [...dots.children].forEach((d,i)=>d.classList.toggle('on',i===current));
+ document.getElementById('count').textContent=
+ String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+ document.getElementById('prev').disabled=current===0;
+ document.getElementById('next').disabled=current===slides.length-1;
 }
 function move(n){show(current+n)}
 document.addEventListener('keydown',e=>{
-if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();move(1)}
-if(e.key==='ArrowLeft')move(-1);
-if(e.key==='Home')show(0);
-if(e.key==='End')show(slides.length-1);
+ if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();move(1)}
+ if(e.key==='ArrowLeft')move(-1);
+ if(e.key==='Home')show(0);
+ if(e.key==='End')show(slides.length-1);
 });
-const clubs=[
-["Arsenal","57"],["Aston Villa","58"],["Chelsea","61"],
-["Everton","62"],["Liverpool","64"],["Manchester City","65"],
-["Manchester United","66"],["Newcastle United","67"],
-["Tottenham Hotspur","73"],["Brighton","397"],
-["West Ham","563"],["Leicester City","338"],
-["Leeds United","341"],["Fulham","63"],["Brentford","402"]
-];
-document.getElementById('clubs').innerHTML=clubs.map(c=>`
-<div class="club"><img loading="lazy" src="https://crests.football-data.org/${c[1]}.svg" alt="Logo ${c[0]}"><p>${c[0]}</p></div>`).join('');
-const players=[
-["Erling Haaland","Manchester City","https://commons.wikimedia.org/wiki/Special:FilePath/Erling_Haaland_2023.jpg"],
-["Mohamed Salah","Liverpool","https://commons.wikimedia.org/wiki/Special:FilePath/Mohamed_Salah_2018.jpg"],
-["Bukayo Saka","Arsenal","https://commons.wikimedia.org/wiki/Special:FilePath/Bukayo_Saka_2022.jpg"],
-["Cristiano Ronaldo","Manchester United","https://commons.wikimedia.org/wiki/Special:FilePath/Cristiano_Ronaldo_2018.jpg"],
-["Thierry Henry","Arsenal","https://commons.wikimedia.org/wiki/Special:FilePath/Thierry_Henry_2008.jpg"],
-["Alan Shearer","Newcastle","https://commons.wikimedia.org/wiki/Special:FilePath/Alan_Shearer_2015.jpg"],
-["Kevin De Bruyne","Manchester City","https://commons.wikimedia.org/wiki/Special:FilePath/Kevin_De_Bruyne_2018.jpg"],
-["Son Heung-min","Tottenham","https://commons.wikimedia.org/wiki/Special:FilePath/Son_Heung-min_2018.jpg"]
-];
-document.getElementById('players').innerHTML=players.map(p=>`
-<div class="player"><img loading="lazy" src="${p[2]}" alt="${p[0]}" onerror="this.style.display='none'"><div><b>${p[0]}</b><br><small>${p[1]}</small></div></div>`).join('');
 show(0);
 </script>
 </body>
