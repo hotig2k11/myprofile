@@ -3,201 +3,216 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>THE PREMIER LEAGUE</title>
 <style>
-:root{--bg:#07130f;--panel:#10231b;--green:#b6f36b;--muted:#b4c4b9}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:white;font-family:Arial,sans-serif;line-height:1.6}
-nav{position:sticky;top:0;background:#07130fee;padding:16px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;z-index:10;border-bottom:1px solid #294536}
-nav strong{color:var(--green);font-size:20px}
-nav a{color:white;text-decoration:none;margin:7px;font-size:13px}
-nav a:hover{color:var(--green)}
-.hero{min-height:75vh;display:flex;align-items:center;padding:8%;background:linear-gradient(90deg,#07130fee,#07130f66),url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=1800') center/cover}
-.hero h1{font-size:clamp(48px,9vw,100px);line-height:.95;margin:15px 0}
-.hero h1 span{color:var(--green)}
-.hero p{max-width:650px;color:#ddd;font-size:18px}
-.btn{display:inline-block;background:var(--green);color:#07130f;padding:12px 20px;text-decoration:none;font-weight:bold;border-radius:6px}
-section{padding:65px 6%;max-width:1250px;margin:auto}
-section:nth-child(even){background:#0b1b14;max-width:none}
-section:nth-child(even)>*{max-width:1120px;margin-left:auto;margin-right:auto}
-.kicker{color:var(--green);letter-spacing:3px;font-size:12px;font-weight:bold}
-h2{font-size:clamp(30px,5vw,52px);line-height:1.1;margin:10px 0 20px}
-.lead{color:var(--muted);max-width:800px}
-.stats,.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:25px}
-.box{background:var(--panel);border:1px solid #294536;border-radius:13px;padding:18px}
-.stat strong{font-size:32px;color:var(--green);display:block}
-.stat span{color:var(--muted);font-size:13px}
-.clubs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:25px}
-.club{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid #294536;padding:14px;border-radius:12px}
-.club img{width:52px;height:52px;object-fit:contain;background:white;border-radius:8px;padding:5px}
-.club small{display:block;color:var(--muted)}
-.people{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:25px}
-.person{padding:0;overflow:hidden}
-.person img{width:100%;height:230px;object-fit:cover;display:block;background:#1b3025}
-.person div{padding:16px}
-.person h3{margin:4px 0}
-.person p{color:var(--muted);font-size:14px}
-.role{color:var(--green);font-size:12px;font-weight:bold}
-.coaches{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:25px}
-.coach{background:var(--panel);border:1px solid #294536;border-radius:12px;padding:20px}
-.coach h3{color:var(--green)}
-.timeline{border-left:2px solid var(--green);padding-left:25px;margin-top:25px}
+body{margin:0;background:#07120d;color:white;font-family:Arial,sans-serif;overflow:hidden}
+:root{--lime:#b8f36b;--panel:#14251c}
+.deck{height:100vh;position:relative}
+.slide{display:none;height:100vh;padding:7vh 8vw 100px;overflow:auto;animation:appear .4s ease}
+.slide.active{display:block}
+@keyframes appear{from{opacity:0;transform:translateX(25px)}to{opacity:1;transform:translateX(0)}}
+.hero{height:100%;display:flex;align-items:center;background:linear-gradient(90deg,#07120df0,#07120d77),url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=1800') center/cover}
+.hero h1{font-size:clamp(55px,10vw,120px);line-height:.9;margin:20px 0}
+.green{color:var(--lime)}
+.tag{color:var(--lime);letter-spacing:4px;font-size:13px;font-weight:bold}
+h2{font-size:clamp(32px,5vw,65px);margin:12px 0}
+p{color:#c4d0c7;line-height:1.8}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:25px}
+.card{background:var(--panel);padding:20px;border:1px solid #34513c;border-radius:14px}
+.card h3{color:var(--lime);margin-top:0}
+.big{font-size:40px;font-weight:bold;color:var(--lime)}
+.clubs{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px}
+.club{background:var(--panel);padding:12px;text-align:center;border-radius:12px;font-size:13px}
+.club img{width:55px;height:55px;object-fit:contain;background:white;border-radius:9px;padding:5px}
+.players{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:20px}
+.player{background:var(--panel);border-radius:12px;overflow:hidden}
+.player img{width:100%;height:170px;object-fit:cover}
+.player div{padding:12px}
+.player b{color:var(--lime)}
+.timeline{border-left:3px solid var(--lime);padding-left:25px;margin-top:25px}
 .event{margin-bottom:25px}
-.event b{color:var(--green)}
-footer{text-align:center;padding:35px;color:var(--muted);border-top:1px solid #294536}
-@media(max-width:800px){.clubs,.stats{grid-template-columns:repeat(2,1fr)}.people,.coaches{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.people,.coaches{grid-template-columns:1fr}.club img{width:42px;height:42px}nav{display:block}nav a{display:inline-block}}
+.event strong{color:var(--lime);font-size:24px}
+.controls{position:fixed;bottom:0;left:0;right:0;background:#07120df2;border-top:1px solid #314638;padding:13px 5%;display:flex;align-items:center;justify-content:space-between;z-index:5}
+button{background:var(--lime);color:#07120d;border:0;padding:11px 19px;border-radius:7px;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.3}
+#dots{display:flex;gap:7px}
+.dot{width:9px;height:9px;border-radius:50%;background:#536456;cursor:pointer}
+.dot.on{background:var(--lime)}
+#count{color:var(--lime);font-weight:bold}
+@media(max-width:700px){
+.slide{padding:5vh 5vw 90px}
+.cards{grid-template-columns:repeat(2,1fr)}
+.clubs{grid-template-columns:repeat(3,1fr)}
+.players{grid-template-columns:repeat(2,1fr)}
+.player img{height:130px}
+#dots{display:none}
+}
 </style>
 </head>
 <body>
+<div class="deck">
 
-<nav>
-<strong>♛ PREMIER LEAGUE</strong>
+<section class="slide active hero">
 <div>
-<a href="#intro">Giới thiệu</a>
-<a href="#clubs">CLB</a>
-<a href="#players">Cầu thủ</a>
-<a href="#coaches">HLV</a>
-<a href="#history">Lịch sử</a>
-<a href="#records">Kỷ lục</a>
+<div class="tag">ENGLISH FOOTBALL · EST. 1992</div>
+<h1>THE<br><span class="green">PREMIER</span><br>LEAGUE.</h1>
+<p>Hành trình khám phá giải bóng đá hấp dẫn bậc nhất nước Anh.</p>
+<p class="green">A HISTORY OF FOOTBALL, PASSION AND GLORY</p>
 </div>
-</nav>
+</section>
 
-<header class="hero">
-<div>
-<div class="kicker">ENGLISH FOOTBALL · EST. 1992</div>
-<h1>THE<br><span>PREMIER</span><br>LEAGUE.</h1>
-<p>Khám phá giải bóng đá hấp dẫn hàng đầu nước Anh: những câu lạc bộ huyền thoại, các siêu sao, những huấn luyện viên xuất sắc và các trận cầu kinh điển.</p>
-<a class="btn" href="#intro">KHÁM PHÁ NGAY ↓</a>
-</div>
-</header>
-
-<section id="intro">
-<div class="kicker">01 / TỔNG QUAN</div>
+<section class="slide">
+<div class="tag">02 / GIỚI THIỆU</div>
 <h2>Premier League là gì?</h2>
-<p class="lead">Premier League là giải đấu cao nhất trong hệ thống bóng đá nam chuyên nghiệp Anh. Giải được thành lập năm 1992 và trở thành một trong những giải đấu được theo dõi nhiều nhất thế giới.</p>
-<div class="stats">
-<div class="box stat"><strong>1992</strong><span>Năm thành lập</span></div>
-<div class="box stat"><strong>20</strong><span>Câu lạc bộ mỗi mùa</span></div>
-<div class="box stat"><strong>38</strong><span>Vòng đấu mỗi đội</span></div>
-<div class="box stat"><strong>380</strong><span>Trận đấu mỗi mùa</span></div>
-</div>
-<h2>Thể thức thi đấu</h2>
-<div class="grid">
-<div class="box"><h3>Thắng</h3><strong style="color:#b6f36b">3 điểm</strong><p>Đội chiến thắng nhận 3 điểm.</p></div>
-<div class="box"><h3>Hòa</h3><strong style="color:#b6f36b">1 điểm</strong><p>Mỗi đội nhận 1 điểm.</p></div>
-<div class="box"><h3>Thua</h3><strong style="color:#b6f36b">0 điểm</strong><p>Đội thua không được điểm.</p></div>
-<div class="box"><h3>Xuống hạng</h3><strong style="color:#b6f36b">3 đội</strong><p>Ba đội cuối bảng xuống Championship.</p></div>
+<p>Premier League là giải đấu cao nhất trong hệ thống bóng đá nam chuyên nghiệp Anh. Giải chính thức thành lập năm 1992 và nhanh chóng trở thành một trong những giải đấu được quan tâm nhất thế giới.</p>
+<div class="cards">
+<div class="card"><div class="big">1992</div><h3>Thành lập</h3><p>Khởi đầu kỷ nguyên Premier League.</p></div>
+<div class="card"><div class="big">20</div><h3>Câu lạc bộ</h3><p>20 đội bóng tham gia mỗi mùa.</p></div>
+<div class="card"><div class="big">380</div><h3>Trận đấu</h3><p>Tổng số trận trong một mùa giải.</p></div>
 </div>
 </section>
 
-<section id="clubs">
-<div class="kicker">02 / CÁC ĐỘI BÓNG</div>
-<h2>Những câu lạc bộ nổi tiếng</h2>
-<p class="lead">Một số CLB tiêu biểu trong lịch sử Premier League. Logo được tải từ nguồn huy hiệu bóng đá bên ngoài.</p>
-<div class="clubs" id="clubList"></div>
+<section class="slide">
+<div class="tag">03 / THỂ THỨC</div>
+<h2>Cuộc đua đường dài</h2>
+<p>Mỗi đội thi đấu với 19 đối thủ theo thể thức lượt đi và lượt về. Tổng cộng 38 trận mỗi đội.</p>
+<div class="cards">
+<div class="card"><div class="big">3</div><h3>Điểm thắng</h3><p>Đội thắng nhận 3 điểm.</p></div>
+<div class="card"><div class="big">1</div><h3>Điểm hòa</h3><p>Mỗi đội nhận 1 điểm.</p></div>
+<div class="card"><div class="big">0</div><h3>Điểm thua</h3><p>Đội thua không có điểm.</p></div>
+</div>
+<div class="card"><h3>Cuộc chiến trụ hạng</h3><p>Ba đội xếp cuối bảng sẽ xuống Championship. Các đội đứng đầu cạnh tranh chức vô địch và suất dự cúp châu Âu.</p></div>
 </section>
 
-<section id="players">
-<div class="kicker">03 / NHỮNG NGÔI SAO</div>
-<h2>Các cầu thủ nổi tiếng</h2>
-<p class="lead">Những cá nhân đã tạo nên dấu ấn lớn trong lịch sử giải đấu.</p>
-<div class="people" id="playerList"></div>
+<section class="slide">
+<div class="tag">04 / CÁC CÂU LẠC BỘ</div>
+<h2>Những đội bóng lớn</h2>
+<p>Những CLB tiêu biểu với lịch sử, bản sắc và lượng người hâm mộ đông đảo.</p>
+<div class="clubs" id="clubs"></div>
 </section>
 
-<section id="coaches">
-<div class="kicker">04 / NHỮNG BỘ ÓC CHIẾN THUẬT</div>
-<h2>Huấn luyện viên huyền thoại</h2>
-<div class="coaches" id="coachList"></div>
+<section class="slide">
+<div class="tag">05 / NGÔI SAO</div>
+<h2>Những cầu thủ nổi tiếng</h2>
+<div class="players" id="players"></div>
 </section>
 
-<section id="history">
-<div class="kicker">05 / DÒNG THỜI GIAN</div>
-<h2>Lịch sử đáng nhớ</h2>
+<section class="slide">
+<div class="tag">06 / HUYỀN THOẠI</div>
+<h2>Những cái tên bất tử</h2>
+<div class="cards">
+<div class="card"><h3>Thierry Henry</h3><p>Huyền thoại Arsenal, nổi tiếng với tốc độ, kỹ thuật và khả năng dứt điểm.</p></div>
+<div class="card"><h3>Alan Shearer</h3><p>Giữ kỷ lục ghi 260 bàn thắng tại Premier League.</p></div>
+<div class="card"><h3>Wayne Rooney</h3><p>Chân sút huyền thoại của Manchester United.</p></div>
+<div class="card"><h3>Frank Lampard</h3><p>Tiền vệ ghi bàn xuất sắc của Chelsea.</p></div>
+<div class="card"><h3>Steven Gerrard</h3><p>Đội trưởng huyền thoại của Liverpool.</p></div>
+<div class="card"><h3>Ryan Giggs</h3><p>Huyền thoại Manchester United với kỷ lục kiến tạo.</p></div>
+</div>
+</section>
+
+<section class="slide">
+<div class="tag">07 / HUẤN LUYỆN VIÊN</div>
+<h2>Những bộ óc chiến thuật</h2>
+<div class="cards">
+<div class="card"><h3>Sir Alex Ferguson</h3><p>13 lần vô địch Premier League cùng Manchester United.</p></div>
+<div class="card"><h3>Arsène Wenger</h3><p>Đưa Arsenal đến mùa giải bất bại 2003/04.</p></div>
+<div class="card"><h3>Pep Guardiola</h3><p>Nổi bật với kiểm soát bóng và pressing hiện đại.</p></div>
+<div class="card"><h3>José Mourinho</h3><p>Nhà cầm quân nổi tiếng với chiến thuật thực dụng.</p></div>
+<div class="card"><h3>Jürgen Klopp</h3><p>Đưa Liverpool trở lại đỉnh cao với gegenpressing.</p></div>
+<div class="card"><h3>Carlo Ancelotti</h3><p>HLV từng giúp Chelsea vô địch mùa 2009/10.</p></div>
+</div>
+</section>
+
+<section class="slide">
+<div class="tag">08 / LỊCH SỬ</div>
+<h2>Những mùa giải đáng nhớ</h2>
 <div class="timeline">
-<div class="event"><b>1992</b><h3>Premier League ra đời</h3><p>Các CLB hàng đầu Anh tách khỏi Football League First Division để thành lập giải đấu mới.</p></div>
-<div class="event"><b>2003–04</b><h3>The Invincibles</h3><p>Arsenal hoàn thành mùa giải bất bại tại Premier League.</p></div>
-<div class="event"><b>2015–16</b><h3>Leicester City vô địch</h3><p>Leicester tạo nên câu chuyện cổ tích khi giành chức vô địch.</p></div>
-<div class="event"><b>2017–18</b><h3>Manchester City đạt 100 điểm</h3><p>Man City trở thành đội đầu tiên đạt 100 điểm trong một mùa giải.</p></div>
-<div class="event"><b>2019–20</b><h3>Liverpool đăng quang</h3><p>Liverpool giành chức vô địch Premier League sau 30 năm chờ đợi danh hiệu vô địch quốc gia.</p></div>
+<div class="event"><strong>1992</strong><h3>Premier League ra đời</h3><p>Một kỷ nguyên mới của bóng đá Anh bắt đầu.</p></div>
+<div class="event"><strong>2003–04</strong><h3>The Invincibles</h3><p>Arsenal vô địch mà không thua trận nào.</p></div>
+<div class="event"><strong>2015–16</strong><h3>Leicester City</h3><p>Câu chuyện cổ tích vô địch làm rung chuyển bóng đá thế giới.</p></div>
+<div class="event"><strong>2017–18</strong><h3>100 điểm</h3><p>Manchester City trở thành đội đầu tiên đạt 100 điểm.</p></div>
+<div class="event"><strong>2019–20</strong><h3>Liverpool vô địch</h3><p>Liverpool giành chức vô địch quốc gia sau 30 năm chờ đợi.</p></div>
 </div>
 </section>
 
-<section id="records">
-<div class="kicker">06 / NHỮNG CON SỐ</div>
-<h2>Kỷ lục Premier League</h2>
-<div class="grid">
-<div class="box"><strong style="color:#b6f36b;font-size:27px">260 bàn</strong><h3>Alan Shearer</h3><p>Cầu thủ ghi nhiều bàn thắng nhất lịch sử giải.</p></div>
-<div class="box"><strong style="color:#b6f36b;font-size:27px">162 kiến tạo</strong><h3>Ryan Giggs</h3><p>Kỷ lục kiến tạo nhiều nhất.</p></div>
-<div class="box"><strong style="color:#b6f36b;font-size:27px">13 lần</strong><h3>Manchester United</h3><p>CLB vô địch nhiều nhất kỷ nguyên Premier League.</p></div>
-<div class="box"><strong style="color:#b6f36b;font-size:27px">49 trận</strong><h3>Arsenal</h3><p>Chuỗi bất bại dài nhất giải.</p></div>
+<section class="slide">
+<div class="tag">09 / KỶ LỤC</div>
+<h2>Những con số lịch sử</h2>
+<div class="cards">
+<div class="card"><div class="big">260</div><h3>Alan Shearer</h3><p>Kỷ lục ghi bàn nhiều nhất.</p></div>
+<div class="card"><div class="big">13</div><h3>Manchester United</h3><p>Số lần vô địch nhiều nhất.</p></div>
+<div class="card"><div class="big">49</div><h3>Arsenal</h3><p>Chuỗi bất bại dài nhất.</p></div>
 </div>
 </section>
 
-<footer>
-<strong>THE PREMIER LEAGUE PRESENTATION</strong>
-<p>Website thuyết trình bóng đá · Hình ảnh và logo tải từ nguồn bên ngoài.</p>
-<a href="https://www.premierleague.com/" style="color:#b6f36b">Trang chủ Premier League</a>
-</footer>
+<section class="slide hero">
+<div>
+<div class="tag">10 / KẾT THÚC</div>
+<h1>THANK<br><span class="green">YOU!</span></h1>
+<h2>Cảm ơn mọi người đã lắng nghe.</h2>
+<p>Premier League không chỉ là bóng đá, đó còn là đam mê, lịch sử và cảm xúc.</p>
+</div>
+</section>
+
+</div>
+
+<div class="controls">
+<button id="prev" onclick="move(-1)">← Trước</button>
+<div id="dots"></div>
+<span id="count">01 / 10</span>
+<button id="next" onclick="move(1)">Tiếp theo →</button>
+</div>
 
 <script>
+let current=0;
+const slides=[...document.querySelectorAll('.slide')];
+const dots=document.getElementById('dots');
+slides.forEach((s,i)=>{
+let d=document.createElement('span');
+d.className='dot'+(i===0?' on':'');
+d.onclick=()=>show(i);
+dots.appendChild(d);
+});
+function show(n){
+current=Math.max(0,Math.min(slides.length-1,n));
+slides.forEach((s,i)=>s.classList.toggle('active',i===current));
+[...dots.children].forEach((d,i)=>d.classList.toggle('on',i===current));
+document.getElementById('count').textContent=String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+document.getElementById('prev').disabled=current===0;
+document.getElementById('next').disabled=current===slides.length-1;
+}
+function move(n){show(current+n)}
+document.addEventListener('keydown',e=>{
+if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();move(1)}
+if(e.key==='ArrowLeft')move(-1);
+if(e.key==='Home')show(0);
+if(e.key==='End')show(slides.length-1);
+});
 const clubs=[
-["Arsenal","57","The Gunners · London"],
-["Aston Villa","58","The Villans · Birmingham"],
-["Bournemouth","1044","The Cherries"],
-["Brentford","402","The Bees · London"],
-["Brighton","397","The Seagulls"],
-["Chelsea","61","The Blues · London"],
-["Crystal Palace","354","The Eagles · London"],
-["Everton","62","The Toffees · Liverpool"],
-["Fulham","63","The Cottagers · London"],
-["Leeds United","341","The Whites"],
-["Liverpool","64","The Reds · Liverpool"],
-["Manchester City","65","The Citizens"],
-["Manchester United","66","The Red Devils"],
-["Newcastle United","67","The Magpies"],
-["Nottingham Forest","351","The Tricky Trees"],
-["Sunderland","71","The Black Cats"],
-["Tottenham Hotspur","73","Spurs · London"]
+["Arsenal","57"],["Aston Villa","58"],["Chelsea","61"],
+["Everton","62"],["Liverpool","64"],["Manchester City","65"],
+["Manchester United","66"],["Newcastle United","67"],
+["Tottenham Hotspur","73"],["Brighton","397"],
+["West Ham","563"],["Leicester City","338"],
+["Leeds United","341"],["Fulham","63"],["Brentford","402"]
 ];
-document.getElementById("clubList").innerHTML=clubs.map(c=>`
-<div class="club">
-<img src="https://crests.football-data.org/${c[1]}.svg" alt="Logo ${c[0]}" loading="lazy">
-<div><b>${c[0]}</b><small>${c[2]}</small></div>
-</div>`).join("");
-
+document.getElementById('clubs').innerHTML=clubs.map(c=>`
+<div class="club"><img loading="lazy" src="https://crests.football-data.org/${c[1]}.svg" alt="Logo ${c[0]}"><p>${c[0]}</p></div>`).join('');
 const players=[
-["Mohamed Salah","Liverpool · Tiền đạo","Ngôi sao tấn công nổi bật, nổi tiếng với tốc độ, khả năng dứt điểm và ghi bàn.","https://commons.wikimedia.org/wiki/Special:FilePath/Mohamed_Salah_2018.jpg"],
-["Erling Haaland","Manchester City · Tiền đạo","Trung phong săn bàn với sức mạnh, tốc độ và khả năng chọn vị trí.","https://commons.wikimedia.org/wiki/Special:FilePath/Erling_Haaland_2023.jpg"],
-["Bukayo Saka","Arsenal · Tiền đạo cánh","Cầu thủ tấn công sáng tạo, nổi bật với khả năng rê bóng và tạo cơ hội.","https://commons.wikimedia.org/wiki/Special:FilePath/Bukayo_Saka_2022.jpg"],
-["Cristiano Ronaldo","Manchester United · Tiền đạo","Siêu sao từng thi đấu tại Premier League, nổi tiếng với khả năng săn bàn.","https://commons.wikimedia.org/wiki/Special:FilePath/Cristiano_Ronaldo_2018.jpg"],
-["Thierry Henry","Arsenal · Tiền đạo","Huyền thoại Arsenal, nổi bật với tốc độ, kỹ thuật và khả năng dứt điểm.","https://commons.wikimedia.org/wiki/Special:FilePath/Thierry_Henry_2008.jpg"],
-["Alan Shearer","Newcastle · Tiền đạo","Chân sút giữ kỷ lục 260 bàn thắng tại Premier League.","https://commons.wikimedia.org/wiki/Special:FilePath/Alan_Shearer_2015.jpg"],
-["Wayne Rooney","Manchester United · Tiền đạo","Một trong những chân sút vĩ đại nhất lịch sử Manchester United.","https://commons.wikimedia.org/wiki/Special:FilePath/Wayne_Rooney_2012.jpg"],
-["Kevin De Bruyne","Manchester City · Tiền vệ","Nổi tiếng với nhãn quan chiến thuật và những đường chuyền kiến tạo.","https://commons.wikimedia.org/wiki/Special:FilePath/Kevin_De_Bruyne_2018.jpg"],
-["Son Heung-min","Tottenham · Tiền đạo","Ngôi sao châu Á nổi bật với tốc độ và khả năng dứt điểm bằng hai chân.","https://commons.wikimedia.org/wiki/Special:FilePath/Son_Heung-min_2018.jpg"],
-["Virgil van Dijk","Liverpool · Hậu vệ","Trung vệ nổi bật với khả năng không chiến và chỉ huy hàng phòng ngự.","https://commons.wikimedia.org/wiki/Special:FilePath/Virgil_van_Dijk_2018.jpg"],
-["Frank Lampard","Chelsea · Tiền vệ","Tiền vệ ghi bàn hàng đầu và là huyền thoại của Chelsea.","https://commons.wikimedia.org/wiki/Special:FilePath/Frank_Lampard_2013.jpg"],
-["Steven Gerrard","Liverpool · Tiền vệ","Đội trưởng huyền thoại của Liverpool, nổi tiếng với tinh thần chiến đấu.","https://commons.wikimedia.org/wiki/Special:FilePath/Steven_Gerrard_2018.jpg"]
+["Erling Haaland","Manchester City","https://commons.wikimedia.org/wiki/Special:FilePath/Erling_Haaland_2023.jpg"],
+["Mohamed Salah","Liverpool","https://commons.wikimedia.org/wiki/Special:FilePath/Mohamed_Salah_2018.jpg"],
+["Bukayo Saka","Arsenal","https://commons.wikimedia.org/wiki/Special:FilePath/Bukayo_Saka_2022.jpg"],
+["Cristiano Ronaldo","Manchester United","https://commons.wikimedia.org/wiki/Special:FilePath/Cristiano_Ronaldo_2018.jpg"],
+["Thierry Henry","Arsenal","https://commons.wikimedia.org/wiki/Special:FilePath/Thierry_Henry_2008.jpg"],
+["Alan Shearer","Newcastle","https://commons.wikimedia.org/wiki/Special:FilePath/Alan_Shearer_2015.jpg"],
+["Kevin De Bruyne","Manchester City","https://commons.wikimedia.org/wiki/Special:FilePath/Kevin_De_Bruyne_2018.jpg"],
+["Son Heung-min","Tottenham","https://commons.wikimedia.org/wiki/Special:FilePath/Son_Heung-min_2018.jpg"]
 ];
-document.getElementById("playerList").innerHTML=players.map(p=>`
-<article class="box person">
-<img src="${p[3]}" alt="${p[0]}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=800'">
-<div><div class="role">${p[1]}</div><h3>${p[0]}</h3><p>${p[2]}</p></div>
-</article>`).join("");
-
-const coaches=[
-["Sir Alex Ferguson","Manchester United","13 chức vô địch Premier League. HLV giàu thành tích nhất lịch sử giải."],
-["Arsène Wenger","Arsenal","Đưa Arsenal đến mùa giải bất bại 2003/04, được gọi là The Invincibles."],
-["Pep Guardiola","Manchester City","Nổi bật với bóng đá kiểm soát, pressing và những danh hiệu lớn."],
-["Jürgen Klopp","Liverpool","Đưa Liverpool trở lại đỉnh cao với lối chơi gegenpressing."],
-["José Mourinho","Chelsea","Nổi bật với tổ chức phòng ngự và khả năng xây dựng đội bóng chiến thắng."],
-["Carlo Ancelotti","Chelsea","Giúp Chelsea vô địch mùa 2009/10 với hàng công ghi 103 bàn."]
-];
-document.getElementById("coachList").innerHTML=coaches.map(c=>`
-<div class="coach"><div class="kicker">HUẤN LUYỆN VIÊN</div><h3>${c[0]}</h3><b>${c[1]}</b><p>${c[2]}</p></div>`).join("");
+document.getElementById('players').innerHTML=players.map(p=>`
+<div class="player"><img loading="lazy" src="${p[2]}" alt="${p[0]}" onerror="this.style.display='none'"><div><b>${p[0]}</b><br><small>${p[1]}</small></div></div>`).join('');
+show(0);
 </script>
 </body>
 </html>
